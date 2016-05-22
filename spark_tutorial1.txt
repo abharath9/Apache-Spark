@@ -1,0 +1,48 @@
+hadoop
+data locality--> data distributed to the nodes
+will send our computation to the data not the data to the computation
+means send program to the data t will execute the program locally
+parallely and locally---
+data read from the disk --perform operation--send back to the disk
+
+spark:
+in memory ---
+data first loaded to the memory(in distributed fashion)
+
+high level tools
+spark sql
+ -- shark(spark hive)
+mlib for machine learning
+blinkdb 
+
+why spark:
+powerful caching and disk persistance capabilities
+faster batch
+real time stream processing
+faster decision making
+
+how do you support iterations
+it is not easy like graph search
+spark:
+interactive data analysis(spark shell)
+
+
+spark is polyglot--can be programmed in multiple languages(java,python scala as of now)
+
+spark is not really dependent on hadoop
+spark has its own cluster manager
+
+hadoop for storage and processing
+
+
+
+scala supports functional programming
+pure func lang--don't allow mutable states
+but scala supports by actors library it allowsbothmutable immutable variables
+scala supports lambdas
+in scala everyting is an object
+
+scala
+(read evaluate print loop)repl--interactive shell
+which usually interpreted
+scala gives an illusion of an interpreter language but it is compiled code

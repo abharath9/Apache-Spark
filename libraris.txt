@@ -1,0 +1,129 @@
+MAP:
+map(sequencefile )
+key,value-->path bytE STREAM
+output(path, jason string)
+
+reduce(path)
+create a txt file which contains all the jason values
+
+export CLASSPATH=/usr/local/hadoop/hadoop-core-1.0.3.jar:/home/spark/ivoafits-0.3.jar:/home/spark/json.jar:/home/spark/boofcv/BoofCV-android-0.18.jar:/home/spark/boofcv/BoofCV-android-0.18-sources.jar:/home/spark/boofcv/BoofCV-calibration-0.18.jar:/home/spark/boofcv/BoofCV-calibration-0.18-sources.jar:/home/spark/boofcv/BoofCV-feature-0.18.jar:/home/spark/boofcv/BoofCV-feature-0.18-sources.jar:/home/spark/boofcv/BoofCV-geo-0.18.jar:/home/spark/boofcv/BoofCV-geo-0.18-sources.jar:/home/spark/boofcv/BoofCV-io-0.18.jar:/home/spark/boofcv/BoofCV-io-0.18-sources.jar:/home/spark/boofcv/BoofCV-ip-0.18.jar:/home/spark/boofcv/BoofCV-ip-0.18-sources.jar:/home/spark/boofcv/BoofCV-openkinect-0.18.jar:/home/spark/boofcv/BoofCV-openkinect-0.18-sources.jar:/home/spark/boofcv/BoofCV-recognition-0.18.jar:/home/spark/boofcv/BoofCV-recognition-0.18-sources.jar:/home/spark/boofcv/BoofCV-sfm-0.18.jar:/home/spark/boofcv/BoofCV-sfm-0.18-sources.jar:/home/spark/boofcv/BoofCV-visualize-0.18.jar:/home/spark/boofcv/BoofCV-visualize-0.18-sources.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18-sources.jar:/home/spark/boofcv/BoofCV-xuggler-0.18.jar:/home/spark/boofcv/BoofCV-xuggler-0.18-sources.jar:/home/spark/boofcv/core-0.26.jar:/home/spark/boofcv/ddogleg-0.6.jar:/home/spark/boofcv/georegression-0.7.jar:/home/spark/boofcv/xmlpull-1.1.3.1.jar:/home/spark/boofcv/xpp3_min-1.1.4c.jar:/home/spark/boofcv/xstream-1.4.7.jar
+
+javac -classpath /usr/local/hadoop/hadoop-core-1.0.3.jar:/home/spark/ivoafits-0.3.jar:/home/spark/json.jar:/home/spark/boofcv/BoofCV-android-0.18.jar:/home/spark/boofcv/BoofCV-android-0.18-sources.jar:/home/spark/boofcv/BoofCV-calibration-0.18.jar:/home/spark/boofcv/BoofCV-calibration-0.18-sources.jar:/home/spark/boofcv/BoofCV-feature-0.18.jar:/home/spark/boofcv/BoofCV-feature-0.18-sources.jar:/home/spark/boofcv/BoofCV-geo-0.18.jar:/home/spark/boofcv/BoofCV-geo-0.18-sources.jar:/home/spark/boofcv/BoofCV-io-0.18.jar:/home/spark/boofcv/BoofCV-io-0.18-sources.jar:/home/spark/boofcv/BoofCV-ip-0.18.jar:/home/spark/boofcv/BoofCV-ip-0.18-sources.jar:/home/spark/boofcv/BoofCV-openkinect-0.18.jar:/home/spark/boofcv/BoofCV-openkinect-0.18-sources.jar:/home/spark/boofcv/BoofCV-recognition-0.18.jar:/home/spark/boofcv/BoofCV-recognition-0.18-sources.jar:/home/spark/boofcv/BoofCV-sfm-0.18.jar:/home/spark/boofcv/BoofCV-sfm-0.18-sources.jar:/home/spark/boofcv/BoofCV-visualize-0.18.jar:/home/spark/boofcv/BoofCV-visualize-0.18-sources.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18-sources.jar:/home/spark/boofcv/BoofCV-xuggler-0.18.jar:/home/spark/boofcv/BoofCV-xuggler-0.18-sources.jar:/home/spark/boofcv/core-0.26.jar:/home/spark/boofcv/ddogleg-0.6.jar:/home/spark/boofcv/georegression-0.7.jar:/home/spark/boofcv/xmlpull-1.1.3.1.jar:/home/spark/boofcv/xpp3_min-1.1.4c.jar:/home/spark/boofcv/xstream-1.4.7.jar:/usr/local/hadoop/lib/commons-cli-1.2.jar -d FITSClasses ImageFeatures.java FITSImageFeatures.java
+
+jar -cvf FITSImageFeatures.jar -C FITSClasses/ .
+
+hadoop jar FITSImageFeatures.jar FITSImageFeatures /user/spark/seq1 /user/spark/seq_out
+
+hadoop jar FITSImageFeatures_map.jar FITSImageFeatures /user/spark/FITSImages_Seq /user/spark/FITS_Features
+
+hadoop jar FITSImageFeatures_map.jar FITSImageFeatures /user/spark/seq1 /user/spark/seq_out_map
+
+
+javac -classpath /usr/local/hadoop/hadoop-core-1.0.3.jar -d classes/ SequenceFileOperations.java
+
+jar -cvf seq.jar -C classes/ .
+
+hadoop jar seq.jar SequenceFileOperations /home/spark/FITS /user/spark/seq1 "Autosave Image -001B.fit"
+
+
+java -XX:+PrintFlagsFinal -version | grep -iE 'HeapSize|PermSize|ThreadStackSize'
+
+
+
+mapreduce.map.java.opts
+
+mapreduce.map.java.opts
+
+mapreduce.reduce.java.opts
+==================================================================================================================================================================
+===================================================================================================================================================================
+hduser
+hd2015user
+ssh nimbus-head
+cd ~/tmp
+upadate mapred-sit.xml
+~/bin/ralldist mapred-site.xml /usr/local/hadoop/conf/
+stop-all.sh
+start-all.sh
+wait for 20 secs
+hadoop fsck /
+hadoop fs -chmod 777 /tmp/hadoop-hduser/mapred/system
+
+
+++++++++++++++++
+sudo apt-get install openjdk-7-jre
+/usr/lib/jvm/java-7-openjdk-amd64/bin/java
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub username@host
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+hdfs namenode -format
+
+ps -fe | grep -i namenode|less
+lsof -i :54310|less
+
+<property>
+    <name>dfs.http.address</name>
+    <value>0.0.0.0:50080</value>
+</property>
+<property>
+   <name>dfs.secondary.http.address</name>
+   <value>0.0.0.0:50090</value>
+</property>
+
+
+fuser -k 54310/tcp
+
+kill -9 jps process id
+netstat -a -t --numeric-ports -p
+
+
+rm -rf /usr/local/hadoop-data/*
+rm -rf /hadoop/data/*
+exit
+
+~/bin/ralldist hdfs-site.xml /usr/local/hadoop/etc/hadoop/
+============================================================================================================
+Autosave Image -001R.fit
+
+{"histogram":{"havg":33153.375,"hstd":185264.29931952065,"hmax":1488286},"lines":[{"start":{"r":2.155470275878906,"y":1552.009521484375,"x":917.9942626953125},"end":{"r":4.3534398396809895,"y":2045.143798828125,"x":1211.982666015625}}],"points":[{"r":3.8283925374348957,"y":2004.825439453125,"x":2690.176025390625},{"r":3.757364400227864,"y":860.723876953125,"x":1892.275634765625}]}
+
+{"histogram":{"havg":33153.375,"hstd":185264.29931952065,"hmax":1488286},"lines":[{"start":{"r":2.155470275878906,"y":1552.009521484375,"x":917.9942626953125},"end":{"r":4.3534398396809895,"y":2045.143798828125,"x":1211.982666015625}}],"points":[{"r":3.8283925374348957,"y":2004.825439453125,"x":2690.176025390625},{"r":3.757364400227864,"y":860.723876953125,"x":1892.275634765625}]}
+
+===================================================================================================================
+javac -classpath /home/spark/hadoop-core-1.0.3.jar:/home/spark/ivoafits-0.3.jar:/home/spark/json.jar:/home/spark/boofcv/BoofCV-android-0.18.jar:/home/spark/boofcv/BoofCV-android-0.18-sources.jar:/home/spark/boofcv/BoofCV-calibration-0.18.jar:/home/spark/boofcv/BoofCV-calibration-0.18-sources.jar:/home/spark/boofcv/BoofCV-feature-0.18.jar:/home/spark/boofcv/BoofCV-feature-0.18-sources.jar:/home/spark/boofcv/BoofCV-geo-0.18.jar:/home/spark/boofcv/BoofCV-geo-0.18-sources.jar:/home/spark/boofcv/BoofCV-io-0.18.jar:/usr/local/hadoop/share/hadoop/common/lib/commons-cli-1.2.jar:/home/spark/boofcv/BoofCV-io-0.18-sources.jar:/home/spark/boofcv/BoofCV-ip-0.18.jar:/home/spark/boofcv/BoofCV-ip-0.18-sources.jar:/home/spark/boofcv/BoofCV-openkinect-0.18.jar:/home/spark/boofcv/BoofCV-openkinect-0.18-sources.jar:/home/spark/boofcv/BoofCV-recognition-0.18.jar:/home/spark/boofcv/BoofCV-recognition-0.18-sources.jar:/home/spark/boofcv/BoofCV-sfm-0.18.jar:/home/spark/boofcv/BoofCV-sfm-0.18-sources.jar:/home/spark/boofcv/BoofCV-visualize-0.18.jar:/home/spark/boofcv/BoofCV-visualize-0.18-sources.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18-sources.jar:/home/spark/boofcv/BoofCV-xuggler-0.18.jar:/home/spark/boofcv/BoofCV-xuggler-0.18-sources.jar:/home/spark/boofcv/core-0.26.jar:/home/spark/boofcv/ddogleg-0.6.jar:/home/spark/boofcv/georegression-0.7.jar:/home/spark/boofcv/xmlpull-1.1.3.1.jar:/home/spark/boofcv/xpp3_min-1.1.4c.jar:/home/spark/boofcv/xstream-1.4.7.jar:/usr/local/hadoop/lib/commons-cli-1.2.jar -d FITSClasses ImageFeatures.java FITSImageFeatures.java
+
+
+
+export CLASSPATH=/home/spark/hadoop-core-1.0.3.jar:/usr/local/hadoop/share/hadoop/common/lib/commons-cli-1.2.jar:/home/spark/ivoafits-0.3.jar:/home/spark/json.jar:/home/spark/boofcv/BoofCV-android-0.18.jar:/home/spark/boofcv/BoofCV-android-0.18-sources.jar:/home/spark/boofcv/BoofCV-calibration-0.18.jar:/home/spark/boofcv/BoofCV-calibration-0.18-sources.jar:/home/spark/boofcv/BoofCV-feature-0.18.jar:/home/spark/boofcv/BoofCV-feature-0.18-sources.jar:/home/spark/boofcv/BoofCV-geo-0.18.jar:/home/spark/boofcv/BoofCV-geo-0.18-sources.jar:/home/spark/boofcv/BoofCV-io-0.18.jar:/home/spark/boofcv/BoofCV-io-0.18-sources.jar:/home/spark/boofcv/BoofCV-ip-0.18.jar:/home/spark/boofcv/BoofCV-ip-0.18-sources.jar:/home/spark/boofcv/BoofCV-openkinect-0.18.jar:/home/spark/boofcv/BoofCV-openkinect-0.18-sources.jar:/home/spark/boofcv/BoofCV-recognition-0.18.jar:/home/spark/boofcv/BoofCV-recognition-0.18-sources.jar:/home/spark/boofcv/BoofCV-sfm-0.18.jar:/home/spark/boofcv/BoofCV-sfm-0.18-sources.jar:/home/spark/boofcv/BoofCV-visualize-0.18.jar:/home/spark/boofcv/BoofCV-visualize-0.18-sources.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18.jar:/home/spark/boofcv/BoofCV-WebcamCapture-0.18-sources.jar:/home/spark/boofcv/BoofCV-xuggler-0.18.jar:/home/spark/boofcv/BoofCV-xuggler-0.18-sources.jar:/home/spark/boofcv/core-0.26.jar:/home/spark/boofcv/ddogleg-0.6.jar:/home/spark/boofcv/georegression-0.7.jar:/home/spark/boofcv/xmlpull-1.1.3.1.jar:/home/spark/boofcv/xpp3_min-1.1.4c.jar:/home/spark/boofcv/xstream-1.4.7.jar:/home/spark/BoofCV-io-0.18.jar
+
+
+hdfs getconf -confKey dfs.blocksize
+
+
+sudo ln -s /usr/local/spark-1.3.1-bin-hadoop2.6 /usr/local/spark
+
+sudo chown -R hduser /usr/local/spark-1.3.1-bin-hadoop2.6
+
+sudo chown -R hduser /usr/local/spark
+
+
+MASTER=spark://192.168.85.135:7077 ./bin/spark-shell
+
+
+The nproc command shows the number of processing units available:
+# nproc
+
+
+MASTER=spark://nimbus-head.cs.wright.edu:7077 ./../bin/spark-shell
+
+~/bin/ralldist spark-defaults.conf /usr/local/spark/conf
+
+javac -classpath /usr/local/spark/lib/spark-examples-1.3.1-hadoop2.6.0.jar:/usr/local/spark/lib/spark-assembly-1.3.1-hadoop2.6.0.jar -d /home/hduser/spark_clasees_pi /usr/local/spark/examples/src/main/java/org/apache/spark/examples/JavaSparkPi.java
+
+./spark-submit --class org.apache.spark.examples.JavaSparkPi --master spark://nimbus-head.cs.wright.edu:7077 --deploy-mode client /home/hduser/JavaSparkPi.jar pi 100
+
+
+mapred.jobtracker.maxtasks.per.job
+mapred.max.maps.per.node

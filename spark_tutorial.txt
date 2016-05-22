@@ -1,0 +1,35 @@
+cluster in memory computing system --> business logics happens in memory holding the results inmemory
+
+spark code in scala
+
+spark through writes apis python java scalaas of now
+
+spark is tightly integrated with yarn
+
+hive -can written in without any change in - spark sql
+hive queries run 100 times faster
+
+hadoop -- java
+python over java -->
+java scala interoperable
+java8 is trying to imitate scala
+
+spark 
+flexibility
+provides options -- >own cluster manager(inbulit,no hadoop,mesos(cluster manager-designed only for cluter manager))
+ 
+run spark on hadoop cluster
+easily integrable with hadoop
+
+Data Analytics
+hive hides the complexity of hadoop from you
+trade off here get the results in minutes not insub seconds
+
+using shark(hive + spark)-- 100times faster thanactual hive
+
+spark developed in 2009 uc berkeley
+community-->yahoo etc
+spark is the most active open source project in big data
+
+spark -- 100times faster than hadoop depends on the application
+compute memory::
